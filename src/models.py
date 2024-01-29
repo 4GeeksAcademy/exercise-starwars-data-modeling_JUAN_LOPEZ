@@ -48,6 +48,27 @@ class Vehicle(Base):
     consumable = Column(String(100), nullable= True)
     favorites = relationship("favorites")
 
+
+
+class Planet(Base):
+    __tablename__ = "planet"
+
+    iud = Column(Integer, primary_key = True)
+    name = Column(String(300), nullable = False)
+    url = Column(String(250), nullable = False)
+    diameter = Column(Integer, nullable = True)
+    rotation_period = Column(Integer, nullable =True)
+    manufacturer = Column(String(50), nullable = True)
+    orbital_period = Column(Integer, nullable = True)
+    lenght = Column(Float, nullable = True)
+    gavity = Column(Integer, nullable = True)
+    population = Column(Integer, nullable = True)
+    climate = Column(String(50), nullable = True)
+    terrain = Column(String(50), nullable = True)
+    surface_water = Column(Integer, nullable = True)
+    favorites = relationship("favorites")
+
+
 class Favorites(Base): 
     __tablename__ = "favorites"
 
@@ -55,7 +76,11 @@ class Favorites(Base):
     People_uid = Column(Integer, ForeignKey("people.uid"))
     vehicle_uid = Column(Integer, ForeignKey("vehicle.uid"))
     planet_uid = Column(Integer, ForeignKey("planet.uid"))
-    user_uid = Column
+    user_uid = Column(Integer, ForeignKey("user.id"))
+    people = relationship("people")
+    planet = relationship("planet")
+    vehicle = relationship("vehicle")
+    user = relationship("user")
 
     
 ## Draw from SQLAlchemy base
